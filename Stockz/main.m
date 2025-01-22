@@ -23,6 +23,13 @@ int main(int argc, const char * argv[]) {
         [stocks addObject:stock];
         
         [stocks writeToFile:@"/tmp/stocks.plist" atomically:YES];
+        
+        NSArray *stockList = [NSArray arrayWithContentsOfFile:@"/tmp/stocks.plist"];
+        
+        for (NSDictionary *dict in stockList) {
+            NSLog(@"I have %@ shares of %@",
+                  [dict objectForKey:@"shares"], [dict objectForKey:@"symbol"]);
+        }
     }
     return 0;
 }
